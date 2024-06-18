@@ -9,22 +9,26 @@ class MonthlyCards extends BaseAction
 
     public function run()
     {
-        $config = yaml_parse_file(ROOT . '/config/monthly-cards.yaml');
-        $name = $config['card']['name'];
-        $description = $config['card']['description'] ?? null;
-        $items = $config['card']['items'];
+        // you can also use yaml_parse_file and parse the yaml config files
+        $config = yaml_parse(env('TRELLO_CARDS_MONTHLY'));
 
-        $trelloCard = new TrelloCard();
-        $trelloCard->setBoardId(env('TRELLO_BOARD_ID'));
-        $trelloCard->setListId(env('TRELLO_LIST_ID_THIS_MONTH'));
+        foreach ($config['cards'] as $card) {
+            $name = $card['name'];
+            $description = $card['description'] ?? null;
+            $items = $card['items'];
 
-        $trelloCard->addLabel(env('TRELLO_LABEL_AUTO'));
-        $trelloCard->addLabel(env('TRELLO_LABEL_PRIVATE'));
-        $trelloCard->addDueDate(now()->endOfMonth()->endOfDay());
+            $trelloCard = new TrelloCard();
+            $trelloCard->setBoardId(env('TRELLO_BOARD_ID'));
+            $trelloCard->setListId(env('TRELLO_LIST_ID_THIS_MONTH'));
 
-        $cardId = $trelloCard->addCard($name, $description);
+            $trelloCard->addLabel(env('TRELLO_LABEL_AUTO'));
+            $trelloCard->addLabel(env('TRELLO_LABEL_PRIVATE'));
+            $trelloCard->addDueDate(now()->endOfMonth()->endOfDay());
 
-        $trelloCard->setCardId($cardId);
-        $trelloCard->addCheckList('Checklist', $items);
+            $cardId = $trelloCard->addCard($name, $description);
+
+            $trelloCard->setCardId($cardId);
+            $trelloCard->addCheckList('Checklist', $items);
+        }
     }
 }

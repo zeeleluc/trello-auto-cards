@@ -1,0 +1,16 @@
+cards:
+  - name: "Card Name 1"
+    description: "Card Description 1" # This field is optional
+    items:
+      - "item1"
+      - "item2"
+  - name: "Card Name 2"
+    description: "Card Description 2" # This field is optional
+    items:
+      - "item3"
+      - "item4"
+  - name: "Card Name 3"
+    # No description provided for this card
+    items:
+      - "item5"
+      - "item6"
