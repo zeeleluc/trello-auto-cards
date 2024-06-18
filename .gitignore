@@ -1,6 +1,3 @@
-/config/daily-cards.yaml.example
-/config/weekly-cards.yaml.example
-/config/monthly-cards.yaml.example
 /vendor
 .env
 /provision/
