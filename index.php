@@ -13,8 +13,7 @@ if (env('ENV') === 'local') {
 
 try {
     (new \App\Initialize())->action()->output();
-
 } catch (Exception $e) {
-    $slack = new \App\Slack();
-    $slack->sendErrorMessage($e->getMessage());
+    echo $e->getMessage() . PHP_EOL;
+    (new \App\Slack())->sendErrorMessage($e->getMessage());
 }

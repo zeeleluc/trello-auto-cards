@@ -41,6 +41,6 @@ if (!function_exists('env')) {
 if (!function_exists('now')) {
     function now(): \Carbon\Carbon
     {
-        return \Carbon\Carbon::now('America/Curacao');
+        return \Carbon\Carbon::now('UTC');
     }
 }

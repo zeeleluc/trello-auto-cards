@@ -25,10 +25,7 @@ class Initialize extends BaseObject
 
     public function output(): void
     {
-        $variables = $this->getAbstractAction()->getAction()->getVariables();
-
-        var_dump($variables);
-
+        $this->getAbstractAction()->getAction();
     }
 
     /**
