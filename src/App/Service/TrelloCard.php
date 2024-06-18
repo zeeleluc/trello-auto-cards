@@ -74,12 +74,16 @@ class TrelloCard
         }
 
         if ($this->dueDate) {
-            var_dump($this->dueDate->format('Y-m-d H:i:s'));
             $additionalData['due'] = $this->dueDate->format('Y-m-d H:i:s');
         }
 
         if ($response = $this->post($additionalData)) {
-            return $response['id'];
+            $cardId = $response['id'];
+
+            $this->url = env('TRELLO_URL') . 'cards/' . $cardId;
+            $this->put(['pos' => 'top']);
+
+            return $cardId;
         }
     }
 
